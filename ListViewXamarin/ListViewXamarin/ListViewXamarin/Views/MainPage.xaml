@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListViewXamarin"
+             xmlns:sync="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             x:Class="ListViewXamarin.MainPage">
+    <ContentPage.Behaviors>
+        <local:Behavior/>
+    </ContentPage.Behaviors>
+    
+    <ContentPage.BindingContext>
+        <local:SortingFilteringViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid x:Name="MainGrid" Margin="{OnPlatform iOS='0,40,0,0'}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <SearchBar x:Name="filterText" Placeholder="Search here to filter" />
+            <sync:SfListView x:Name="listView" ItemsSource="{Binding Items}" Grid.Row="1" ItemSpacing="0,5,0,5" BackgroundColor="#F0F0F0" ItemSize="100">
+                <sync:SfListView.ItemTemplate>
+                    <DataTemplate x:Name="ItemTemplate" >
+                        <Frame OutlineColor="#b3b3b3" Padding="2" Margin="10,0,10,0">
+                            <Grid BackgroundColor="White" Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label x:Name="TitleLabel" LineBreakMode="NoWrap" Text="{Binding Title}" FontAttributes="Bold" TextColor="Black"/>
+                                <Label Grid.Row="1" x:Name="DescriptionLabel" Text="{Binding Description}" TextColor="Teal"/>
+                                <Frame Grid.Row="2" Padding="4,2,4,2" BackgroundColor="#FFE7E8E9" HorizontalOptions="Start" VerticalOptions="End">
+                                    <Label x:Name="TagLabel" LineBreakMode="NoWrap" Text="{Binding Tag}" FontSize="10" TextColor="Black"/>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </sync:SfListView.ItemTemplate>
+            </sync:SfListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
